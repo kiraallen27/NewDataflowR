@@ -1,0 +1,13 @@
+Package: NewDataflowR
+Type: Package
+Title:Toolbox for Processing and Viewing Underway Dataflow Output
+Version: 0.1.0
+Author: Kira Allen <kiallen@sfwmd.gov>, Jemma Stachelek <stachel2@msu.edu>
+Maintainer: Kira Allen <kiallen@sfwmd.gov>
+Description: Functions are provided to clean, aggregate, and plot Dataflow
+    output.
+Imports: methods, gdata, ipdw, raster, sf, sp, MASS, car, latticeExtra, rasterVis, viridis, stats, utils, graphics, zoo
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
