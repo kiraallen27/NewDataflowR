@@ -251,23 +251,23 @@ streamclean <- function (yearmon, gps, dfmmin = NA, c6mmin = NA, eummin = NA,
 
     #clean data frame
     #trim beginning and end based on when data is all zeros
-    trimdt <- function(dt){
-      j <- 1
-      for(i in 1:nrow(dt)){
-        if(dt[i,1:9][order(dt[i,1:9])][2] > 0){
-          break
-        }
-        j <- i + 1
-      }
-      k <- nrow(dt)
-      for(i in nrow(dt):1){
-        if(!is.na(min(dt[i, 1:9])) > 0){
-          break
-        }
-        k <- i - 1
-      }
-      dt[j:k,]
-    }
+    #trimdt <- function(dt){
+      #j <- 1
+      #for(i in 1:nrow(dt)){
+        #if(dt[i,1:9][order(dt[i,1:9])][2] > 0){
+          #break
+        #}
+        #j <- i + 1
+      #}
+      #k <- nrow(dt)
+      #for(i in nrow(dt):1){
+        #if(!is.na(min(dt[i, 1:9])) > 0){
+          #break
+        #}
+        #k <- i - 1
+      #}
+      #dt[j:k,]
+    #}
 
     #issues with trimdt function and not really necessary, so not applying it
     #dt <- trimdt(dt)
@@ -431,7 +431,7 @@ streamclean <- function (yearmon, gps, dfmmin = NA, c6mmin = NA, eummin = NA,
     if (any(duplicated(dt_zoo_full$datetime)==TRUE)) {
       dt_zoo_full <- dt_zoo_full[-c(anyDuplicated(dt_zoo_full$datetime)),]
     }
-    ##
+    ####
     dt_zoo_full <- merge(dt_zoo_full, dt_zoo)
     dt_zoo_full <- dt_zoo_full[min(which(!is.na(dt_zoo_full[,
                                                             2]))):max(which(!is.na(dt_zoo_full[, 2]))), ]
