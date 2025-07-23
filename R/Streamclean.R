@@ -279,7 +279,7 @@ streamclean <- function (yearmon, gps, dfmmin = NA, c6mmin = NA, eummin = NA,
     if(typeof(dt$temp)=="character") {
       dt$temp <- as.numeric(dt$temp)
     }
-    corsal <- DataflowR2023::cond2sal(dt$cond * 1000, dt$temp)
+    corsal <- NewDataflowR::cond2sal(dt$cond * 1000, dt$temp)
     if((lm(corsal ~ dt$sal)$coefficients[2] - 1) > 0.02){
       dt$sal <- corsal
     }
