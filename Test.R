@@ -6,6 +6,20 @@
 #R markdown info
 #https://www.geeksforgeeks.org/how-to-create-an-r-markdown-document/
 
+n <- 1
+pkginstall <- function(package) {
+  while(system.file(package=package)=="") {
+    install.packages(package)
+    if(n > 10) {
+      break
+    }
+    n <- n+1
+  }
+}
+
+package <- "png"
+pkginstall(package)
+
 
 #Packages needed for package creation
 library(devtools)
@@ -23,16 +37,18 @@ library(NewDataflowR)
 #Test functions
 
 #Clean streaming data
-dt <- streamclean(yearmon = 202503, gps = "exo", exommin = 12, c6mmin = 12, tofile = T)
+dt <- streamclean(yearmon = 202602, gps = "exo", exommin = 12, c6mmin = 12, tofile = T)
+
+dt <- streamclean(yearmon=200704, gps="df", dfmmin=7, tofile=T)
 
 #Load streamcleaned data
-dt <- streamget(yearmon=202503, qa=T)
+dt <- streamget(yearmon=202602, qa=F)
 
 #Interpolate streaming data
-streaminterp(streamget(yearmon = 202503, qa = TRUE), paramlist = c("salpsu"), 202503)
+streaminterp(streamget(yearmon = 202602, qa = FALSE), paramlist = c("temp.c","sal.psu", "chlorophyll.rfu"), 202602)
 
 #Quick map of interpolated data
-surfplot(rnge=c(202503), params=c("salpsu"))
+surfplot(rnge=c(202602), params=c("chlorophyll.rfu"))
 
 #Clean grab data
 g <- grabclean(yearmon = 202412, tofile = F)
@@ -59,6 +75,15 @@ cdommap(yearmon = 202412, subgroup=c("Middle", "Monroe Lake", "Taylor River", "S
 
 #Quick map of interpolate chl
 surfplot(rnge=c(202412), params=c("chlext"))
+
+#Test QA functions
+d <- QAflags(yearmon=202602, param="turbidity.fnu", bad_min=0, bad_max=500, sus_min=0.01, sus_max=200, step_threshold=10,
+             plots=c("step flag points"), original.data=T)
+data <- d[[1]]
+d[[2]]
+
+df <- replace_data(df=data, yearmon=202602, value_var="tal.pc.rfu", min_value=0, replace_val=0, save=T)
+df <- replace_data(df=data, yearmon=202602, value_var="tal.pc.rfu", max_value=6, replace_val=NA, save=T)
 
 
 
