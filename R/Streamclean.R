@@ -543,8 +543,8 @@ streamclean <- function (yearmon, gps, dfmmin = NA, c6mmin = NA, eummin = NA,
 #'}
 streamget <- function(yearmon, qa = TRUE, fdir = getOption("fdir")){
   #Read QA file if it exists
-  if(qa == TRUE && file.exists(file.path(fdir, "DF_FullDataSets", "QA datasets", paste(yearmon, "j_qa.csv", sep = "")))){
-    dt <- read.csv(file.path(fdir, "DF_FullDataSets", "QA datasets", paste(yearmon, "j_qa.csv", sep = "")))
+  if(qa == TRUE && file.exists(file.path(fdir, "DF_FullDataSets", "QA datasets", paste(yearmon, "_qa.csv", sep = "")))){
+    dt <- read.csv(file.path(fdir, "DF_FullDataSets", "QA datasets", paste(yearmon, "_qa.csv", sep = "")))
     if(!any(names(dt) == "chlext")){
       dt$chlext <- NA
     }
